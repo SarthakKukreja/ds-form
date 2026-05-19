@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DS Mapping Form</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f4f4f0;
+    color: #1a1a1a;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: #111;
+  }
+
+  .header p {
+    font-size: 14px;
+    color: #888;
+    margin-top: 4px;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid #e8e8e4;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 16px;
+  }
+
+  .card-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+  }
+
+  .field { margin-bottom: 14px; }
+  .field:last-child { margin-bottom: 0; }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"], select {
+    width: 100%;
+    padding: 9px 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fafafa;
+    color: #111;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  input[type="text"]:focus, select:focus {
+    border-color: #999;
+    background: #fff;
+  }
+
+  select:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .ds-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .ds-table th {
+    font-size: 11px;
+    font-weight: 600;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-align: left;
+    padding: 0 8px 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .ds-table td {
+    padding: 9px 8px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    color: #333;
+    vertical-align: middle;
+  }
+
+  .ds-table tr:last-child td { border-bottom: none; }
+
+  .ds-table td select {
+    font-size: 13px;
+    padding: 7px 10px;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+    margin-top: 4px;
+  }
+
+  .submit-btn:hover:not(:disabled) { opacity: 0.85; }
+  .submit-btn:active:not(:disabled) { transform: scale(0.99); }
+  .submit-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  .empty-hint {
+    text-align: center;
+    padding: 2rem;
+    color: #aaa;
+    font-size: 14px;
+    background: #fff;
+    border: 1px dashed #e0e0e0;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+
+  .success-banner {
+    display: none;
+    background: #f0faf4;
+    border: 1px solid #b6e8c8;
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: #1a6b3c;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .error-banner {
+    display: none;
+    background: #fff5f5;
+    border: 1px solid #f5c0c0;
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: #b91c1c;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 480px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    body { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>DS Mapping Form</h1>
+    <p>Select your details, assign values to each DS, then submit.</p>
+  </div>
+
+  <div id="success-banner" class="success-banner">✓ Submitted successfully! You can fill another entry.</div>
+  <div id="error-banner" class="error-banner">Something went wrong. Please try again or contact your admin.</div>
+
+  <!-- Identity -->
+  <div class="card">
+    <div class="card-title">Your Details</div>
+    <div class="field">
+      <label for="submitter-name">Name / Employee ID</label>
+      <input type="text" id="submitter-name" placeholder="Enter your name or ID" autocomplete="off">
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="card">
+    <div class="card-title">Location</div>
+    <div class="grid-2">
+      <div class="field">
+        <label>Branch</label>
+        <select id="sel-branch" onchange="onBranch()">
+          <option value="">— select —</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Section</label>
+        <select id="sel-section" onchange="onSection()" disabled>
+          <option value="">— select —</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>WD</label>
+        <select id="sel-wd" onchange="onWD()" disabled>
+          <option value="">— select —</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>AE</label>
+        <select id="sel-ae" onchange="onAE()" disabled>
+          <option value="">— select —</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- DS List -->
+  <div id="empty-hint" class="empty-hint">Select Branch → Section → WD → AE to load the DS list</div>
+
+  <div id="ds-card" class="card" style="display:none">
+    <div class="card-title">DS Values</div>
+    <table class="ds-table">
+      <thead>
+        <tr>
+          <th>DS</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody id="ds-tbody"></tbody>
+    </table>
+  </div>
+
+  <button class="submit-btn" id="submit-btn" onclick="submitForm()" disabled>Submit</button>
+</div>
+
+<script>
+// ─── CONFIG ───────────────────────────────────────────────
+// Paste your Google Apps Script Web App URL here after setup:
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxeEwgQec9ooVnZqVUDMqIIkCrYB4KPbGhGd2rTFaFOnxPknNdmjxPIf-545Thd9uDT/exec";
+
+// ─── DATA ─────────────────────────────────────────────────
+// Replace this with your real hierarchy data
+const DATA = {
+  "North Branch": {
+    "Section A": {
+      "WD-1": {
+        "AE-Alpha": ["DS-101","DS-102","DS-103"],
+        "AE-Beta":  ["DS-104","DS-105"]
+      },
+      "WD-2": {
+        "AE-Gamma": ["DS-106","DS-107","DS-108"],
+        "AE-Delta": ["DS-109"]
+      }
+    },
+    "Section B": {
+      "WD-3": {
+        "AE-Epsilon": ["DS-110","DS-111"],
+        "AE-Zeta":    ["DS-112","DS-113","DS-114"]
+      }
+    }
+  },
+  "South Branch": {
+    "Section C": {
+      "WD-4": {
+        "AE-Eta":   ["DS-115","DS-116"],
+        "AE-Theta": ["DS-117","DS-118","DS-119"]
+      }
+    },
+    "Section D": {
+      "WD-5": {
+        "AE-Iota":  ["DS-120","DS-121"],
+        "AE-Kappa": ["DS-122"]
+      },
+      "WD-6": {
+        "AE-Lambda": ["DS-123","DS-124","DS-125"]
+      }
+    }
+  },
+  "East Branch": {
+    "Section E": {
+      "WD-7": {
+        "AE-Mu":  ["DS-126","DS-127"],
+        "AE-Nu":  ["DS-128","DS-129"]
+      }
+    },
+    "Section F": {
+      "WD-8": {
+        "AE-Xi":     ["DS-130","DS-131","DS-132"],
+        "AE-Omicron":["DS-133"]
+      }
+    }
+  }
+};
+
+const DROPDOWN_VALUES = [
+  "DS Pair 1","DS Pair 2","DS Pair 3","DS Pair 4","DS Pair 5",
+  "Triplet 1","Triplet 2","Triplet 3","Triplet 4","Triplet 5"
+];
+
+// ─── HELPERS ──────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+
+function populate(sel, opts) {
+  sel.innerHTML = '<option value="">— select —</option>' +
+    opts.map(o => `<option value="${o}">${o}</option>`).join('');
+  sel.disabled = false;
+}
+
+function disable(sel) {
+  sel.innerHTML = '<option value="">— select —</option>';
+  sel.disabled = true;
+}
+
+function hideDSCard() {
+  $('ds-card').style.display = 'none';
+  $('empty-hint').style.display = 'block';
+  $('submit-btn').disabled = true;
+}
+
+// ─── NAVIGATION ───────────────────────────────────────────
+const bSel  = $('sel-branch');
+const sSel  = $('sel-section');
+const wSel  = $('sel-wd');
+const aeSel = $('sel-ae');
+
+populate(bSel, Object.keys(DATA));
+
+function onBranch() {
+  disable(sSel); disable(wSel); disable(aeSel);
+  hideDSCard();
+  if (bSel.value) populate(sSel, Object.keys(DATA[bSel.value]));
+}
+
+function onSection() {
+  disable(wSel); disable(aeSel);
+  hideDSCard();
+  if (sSel.value) populate(wSel, Object.keys(DATA[bSel.value][sSel.value]));
+}
+
+function onWD() {
+  disable(aeSel);
+  hideDSCard();
+  if (wSel.value) populate(aeSel, Object.keys(DATA[bSel.value][sSel.value][wSel.value]));
+}
+
+function onAE() {
+  if (!aeSel.value) { hideDSCard(); return; }
+  const dsList = DATA[bSel.value][sSel.value][wSel.value][aeSel.value];
+  renderDS(dsList);
+}
+
+// ─── DS TABLE ─────────────────────────────────────────────
+function renderDS(dsList) {
+  const tbody = $('ds-tbody');
+  tbody.innerHTML = dsList.map(ds => `
+    <tr>
+      <td>${ds}</td>
+      <td>
+        <select class="ds-val" data-ds="${ds}" onchange="checkReady()">
+          <option value="">— select —</option>
+          ${DROPDOWN_VALUES.map(v => `<option value="${v}">${v}</option>`).join('')}
+        </select>
+      </td>
+    </tr>
+  `).join('');
+  $('ds-card').style.display = 'block';
+  $('empty-hint').style.display = 'none';
+  checkReady();
+}
+
+function checkReady() {
+  const name    = $('submitter-name').value.trim();
+  const branch  = bSel.value;
+  const section = sSel.value;
+  const wd      = wSel.value;
+  const ae      = aeSel.value;
+  const selects = document.querySelectorAll('.ds-val');
+  const allFilled = selects.length > 0 && [...selects].every(s => s.value);
+  $('submit-btn').disabled = !(name && branch && section && wd && ae && allFilled);
+}
+
+$('submitter-name').addEventListener('input', checkReady);
+
+// ─── SUBMIT ───────────────────────────────────────────────
+async function submitForm() {
+  const btn = $('submit-btn');
+  btn.innerHTML = '<span class="spinner"></span>Submitting…';
+  btn.disabled = true;
+  $('success-banner').style.display = 'none';
+  $('error-banner').style.display = 'none';
+
+  const timestamp = new Date().toLocaleString();
+  const name      = $('submitter-name').value.trim();
+  const branch    = bSel.value;
+  const section   = sSel.value;
+  const wd        = wSel.value;
+  const ae        = aeSel.value;
+
+  const rows = [];
+  document.querySelectorAll('.ds-val').forEach(s => {
+    rows.push({
+      timestamp, name, branch, section, wd, ae,
+      ds: s.dataset.ds,
+      value: s.value
+    });
+  });
+
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ rows })
+    });
+    $('success-banner').style.display = 'block';
+    resetForm();
+  } catch (err) {
+    $('error-banner').style.display = 'block';
+    btn.disabled = false;
+  }
+
+  btn.innerHTML = 'Submit';
+}
+
+function resetForm() {
+  $('submitter-name').value = '';
+  disable(sSel); disable(wSel); disable(aeSel);
+  bSel.value = '';
+  hideDSCard();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
