@@ -268,57 +268,206 @@
 <script>
 // ─── CONFIG ───────────────────────────────────────────────
 // Paste your Google Apps Script Web App URL here after setup:
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxeEwgQec9ooVnZqVUDMqIIkCrYB4KPbGhGd2rTFaFOnxPknNdmjxPIf-545Thd9uDT/exec";
+const APPS_SCRIPT_URL = "YOUR_APPS_SCRIPT_URL_HERE";
 
 // ─── DATA ─────────────────────────────────────────────────
 // Replace this with your real hierarchy data
 const DATA = {
-  "North Branch": {
-    "Section A": {
-      "WD-1": {
-        "AE-Alpha": ["DS-101","DS-102","DS-103"],
-        "AE-Beta":  ["DS-104","DS-105"]
+  "EPAT": {
+    "PAC001": {
+      "PA3821": {
+        "Rajesh Sharma":    ["Amit Verma","Suresh Nair","Priya Patel","Kavita Rao","Deepak Joshi","Manoj Tiwari","Sunita Gupta","Ravi Kumar","Anita Singh","Pooja Mehta"],
+        "Vikram Chauhan":   ["Sanjay Pillai","Neha Agarwal","Rohit Mishra","Geeta Iyer","Arjun Reddy","Lalita Dubey","Harish Pandey","Rekha Shah","Vinod Yadav","Sheela Nair"]
       },
-      "WD-2": {
-        "AE-Gamma": ["DS-106","DS-107","DS-108"],
-        "AE-Delta": ["DS-109"]
+      "PA5467": {
+        "Mohan Lal":        ["Ramesh Bose","Usha Menon","Dinesh Jain","Radha Krishnan","Sunil Choudhary","Meena Saxena","Ashok Tripathi","Padma Venkat","Girish Shetty","Kamla Rawat"],
+        "Preeti Bhatt":     ["Vivek Thakur","Ananya Ghosh","Naresh Ojha","Shanta Pillai","Kishore Dey","Urmila Kaur","Pankaj Shukla","Sarla Bajaj","Hemant Dixit","Vimla Patil"]
       }
     },
-    "Section B": {
-      "WD-3": {
-        "AE-Epsilon": ["DS-110","DS-111"],
-        "AE-Zeta":    ["DS-112","DS-113","DS-114"]
+    "PAC002": {
+      "PA7134": {
+        "Arun Srivastava":  ["Bharat Nath","Champa Rao","Devendra Singh","Ekta Joshi","Farhan Malik","Gauri Tiwari","Harsha Menon","Indira Verma","Jagdish Patel","Kaveri Reddy"],
+        "Sudha Kulkarni":   ["Laxman Iyer","Mamta Bhatia","Neeraj Kumar","Omkar Jain","Parvati Das","Qadir Shaikh","Rani Gupta","Satish Pandey","Tara Nair","Uma Chopra"]
+      },
+      "PA2956": {
+        "Brijesh Mishra":   ["Varun Desai","Wajid Khan","Yamini Rao","Zara Singh","Aditya Mehta","Beena Pillai","Chetan Sharma","Damini Tiwari","Eshan Dubey","Falguni Shah"],
+        "Nalini Sinha":     ["Gaurav Yadav","Hema Krishnan","Ishan Joshi","Jayanti Patil","Kalpana Saxena","Lalit Shukla","Madhu Venkat","Nikhil Bajaj","Oshin Rawat","Pushpa Thakur"]
       }
     }
   },
-  "South Branch": {
-    "Section C": {
-      "WD-4": {
-        "AE-Eta":   ["DS-115","DS-116"],
-        "AE-Theta": ["DS-117","DS-118","DS-119"]
+  "NSAH": {
+    "SAC001": {
+      "SA6312": {
+        "Deepa Ghosh":      ["Qureshi Ansari","Revathi Nair","Shyam Bose","Tanvi Menon","Umesh Ojha","Vanita Kaur","Wasim Siddiqui","Xena Pillai","Yash Dixit","Zeenat Bajaj"],
+        "Raghav Pillai":    ["Anand Tiwari","Bhavna Verma","Chandra Rao","Dilnoza Singh","Eknath Joshi","Fatima Patel","Ganesh Iyer","Hina Reddy","Imran Gupta","Jyoti Kumar"]
+      },
+      "SA4789": {
+        "Sushil Dey":       ["Kiran Sharma","Leela Pandey","Mukesh Nath","Nandita Bhatia","Onkar Jain","Priti Das","Ramakant Rao","Savita Menon","Trilok Singh","Urvashi Tiwari"],
+        "Madhuri Kaul":     ["Venu Pillai","Waseem Shah","Yashoda Kumar","Zubair Ansari","Archana Mishra","Balram Shetty","Chanchal Gupta","Damodar Joshi","Eshita Nair","Fateh Singh"]
       }
     },
-    "Section D": {
-      "WD-5": {
-        "AE-Iota":  ["DS-120","DS-121"],
-        "AE-Kappa": ["DS-122"]
+    "SAC002": {
+      "SA8023": {
+        "Nirmala Rao":      ["Govind Patel","Hamida Bano","Ishaan Dubey","Janki Saxena","Kewal Shukla","Lata Venkat","Mahesh Bajaj","Nalini Rawat","Omkar Thakur","Padmini Ghosh"],
+        "Suresh Pillai":    ["Qasim Shaikh","Rukmini Menon","Shankar Bose","Tabassum Kaur","Uday Ojha","Vandana Krishnan","Wasim Patil","Xenia Iyer","Yogesh Reddy","Zuber Khan"]
       },
-      "WD-6": {
-        "AE-Lambda": ["DS-123","DS-124","DS-125"]
+      "SA1567": {
+        "Kalpana Devi":     ["Amrit Tiwari","Bela Verma","Charu Rao","Dhruv Singh","Esha Joshi","Feroze Patel","Gita Nair","Hemraj Gupta","Ira Kumar","Jagannath Sharma"],
+        "Vinayak Shastri":  ["Kamla Pandey","Laxmi Nath","Meghna Bhatia","Narayan Jain","Ojaswi Das","Prabha Rao","Ravin Menon","Suchitra Singh","Tulsi Tiwari","Vaibhav Pillai"]
       }
     }
   },
-  "East Branch": {
-    "Section E": {
-      "WD-7": {
-        "AE-Mu":  ["DS-126","DS-127"],
-        "AE-Nu":  ["DS-128","DS-129"]
+  "NDEL": {
+    "DEC001": {
+      "DE9234": {
+        "Gaurav Tandon":    ["Wahida Shaikh","Yusuf Ansari","Zarina Bano","Ajit Shetty","Bindiya Gupta","Chandan Joshi","Devyani Nair","Elan Reddy","Farida Patel","Gajendra Kumar"],
+        "Sunanda Kaul":     ["Haris Menon","Indrani Bose","Joginder Kaur","Keshav Ojha","Lata Krishnan","Mukta Venkat","Nirmal Bajaj","Omvati Rawat","Prabhat Thakur","Qudsiya Shaikh"]
+      },
+      "DE4512": {
+        "Rajendra Prasad":  ["Renu Ghosh","Santosh Pillai","Tariq Ansari","Usha Bano","Vijendra Shetty","Wasima Gupta","Xavier Joshi","Yamuna Nair","Zakir Reddy","Alok Patel"],
+        "Mamata Devi":      ["Bhanu Kumar","Chitra Menon","Dinkar Bose","Ela Kaur","Farrukh Ojha","Gouri Krishnan","Hari Venkat","Ila Bajaj","Jitendra Rawat","Kamini Thakur"]
       }
     },
-    "Section F": {
-      "WD-8": {
-        "AE-Xi":     ["DS-130","DS-131","DS-132"],
-        "AE-Omicron":["DS-133"]
+    "DEC002": {
+      "DE7845": {
+        "Prakash Anand":    ["Laleh Shaikh","Mohan Ansari","Nita Bano","Omkar Shetty","Pushpa Gupta","Qamar Joshi","Rita Nair","Shailesh Reddy","Tanu Patel","Upen Kumar"],
+        "Saroj Mehta":      ["Veena Menon","Waman Bose","Xara Kaur","Yadav Ojha","Zeba Krishnan","Anupam Venkat","Bina Bajaj","Charu Rawat","Dipa Thakur","Eswaran Ghosh"]
+      },
+      "DE2378": {
+        "Hemanta Misra":    ["Farooq Pillai","Geetha Ansari","Hanif Bano","Indira Shetty","Jagat Gupta","Kamala Joshi","Lalu Nair","Madhu Reddy","Navin Patel","Osman Kumar"],
+        "Bimla Sharma":     ["Prem Menon","Qadir Bose","Ruhi Kaur","Sukhdev Ojha","Tanya Krishnan","Ujjwal Venkat","Varsha Bajaj","Wasim Rawat","Xena Thakur","Yash Ghosh"]
+      }
+    }
+  },
+  "NLUC": {
+    "LUC001": {
+      "LU3367": {
+        "Zarina Pillai":    ["Arvind Ansari","Basanti Bano","Chander Shetty","Dimple Gupta","Ekalavya Joshi","Fiza Nair","Ghanshyam Reddy","Hemlata Patel","Inder Kumar","Janardhan Menon"],
+        "Triveni Kaul":     ["Karuna Bose","Lakshman Kaur","Monika Ojha","Nagesh Krishnan","Oosha Venkat","Pappu Bajaj","Rajani Rawat","Samir Thakur","Tarun Ghosh","Usha Pillai"]
+      },
+      "LU5891": {
+        "Vinod Shastri":    ["Vimala Ansari","Wakeel Bano","Xara Shetty","Yunus Gupta","Zohra Joshi","Amar Nair","Bilquis Reddy","Chandni Patel","Dhanpat Kumar","Ela Menon"],
+        "Pushpa Chauhan":   ["Furkan Bose","Ganga Kaur","Harbhajan Ojha","Iravati Krishnan","Javed Venkat","Kanthi Bajaj","Lali Rawat","Mohan Thakur","Nadia Ghosh","Omprakash Pillai"]
+      }
+    },
+    "LUC002": {
+      "LU7124": {
+        "Shobha Rani":      ["Priyanka Ansari","Qayum Bano","Rashida Shetty","Subhash Gupta","Tejas Joshi","Urmila Nair","Vijay Reddy","Wahab Patel","Xenia Kumar","Yashwant Menon"],
+        "Girja Devi":       ["Zafar Bose","Amna Kaur","Babu Ojha","Chinmay Krishnan","Durgesh Venkat","Elsa Bajaj","Farhana Rawat","Govinda Thakur","Hamid Ghosh","Indumati Pillai"]
+      },
+      "LU2456": {
+        "Naresh Yadav":     ["Jamuna Ansari","Kanti Bano","Laila Shetty","Magan Gupta","Noor Joshi","Osman Nair","Padma Reddy","Quadir Patel","Rina Kumar","Shanta Menon"],
+        "Rekha Dixit":      ["Triloki Bose","Urvashi Kaur","Veer Ojha","Wajida Krishnan","Xenia Venkat","Yashoda Bajaj","Zubeda Rawat","Amol Thakur","Bindhu Ghosh","Chandra Pillai"]
+      }
+    }
+  },
+  "SKAR": {
+    "KAC001": {
+      "KA4423": {
+        "Daksha Rao":       ["Devraj Ansari","Esha Bano","Fawad Shetty","Girija Gupta","Harjeet Joshi","Irina Nair","Jagtar Reddy","Kavya Patel","Lohit Kumar","Mamoni Menon"],
+        "Surjit Singh":     ["Naina Bose","Ojasvi Kaur","Pawan Ojha","Quratulain Krishnan","Rajan Venkat","Saraswati Bajaj","Tathagat Rawat","Uday Thakur","Vasudha Ghosh","Wasif Pillai"]
+      },
+      "KA6789": {
+        "Meenakshi Devi":   ["Xena Ansari","Yasmin Bano","Zafira Shetty","Abha Gupta","Baldev Joshi","Charulata Nair","Dilshad Reddy","Eesha Patel","Farhan Kumar","Ganpati Menon"],
+        "Ranjit Kapoor":    ["Hansa Bose","Irfan Kaur","Jagdamba Ojha","Kalyani Krishnan","Latika Venkat","Mithilesh Bajaj","Nalesh Rawat","Omana Thakur","Palash Ghosh","Qamra Pillai"]
+      }
+    },
+    "KAC002": {
+      "KA1234": {
+        "Sulochana Nair":   ["Radhika Ansari","Satnam Bano","Tejinder Shetty","Urvashi Gupta","Vani Joshi","Wasim Nair","Xena Reddy","Yatin Patel","Zakiya Kumar","Amita Menon"],
+        "Pradeep Varma":    ["Babli Bose","Chintamani Kaur","Dhruva Ojha","Ekambaram Krishnan","Falak Venkat","Govardhan Bajaj","Hazel Rawat","Ibha Thakur","Janavi Ghosh","Kailash Pillai"]
+      },
+      "KA8901": {
+        "Asha Bhosle":      ["Leeladhar Ansari","Malini Bano","Nandkumar Shetty","Ojaswini Gupta","Pramila Joshi","Quasim Nair","Ramola Reddy","Satyendra Patel","Tanmay Kumar","Urmila Menon"],
+        "Diwakar Jha":      ["Veda Bose","Waqar Kaur","Xara Ojha","Yashomati Krishnan","Zinat Venkat","Aruna Bajaj","Bhola Rawat","Champaben Thakur","Diwaker Ghosh","Esha Pillai"]
+      }
+    }
+  },
+  "SBLR": {
+    "BLC001": {
+      "BL5512": {
+        "Venkata Rao":      ["Farida Ansari","Geeta Bano","Haridas Shetty","Indrani Gupta","Jagpati Joshi","Kamini Nair","Lakmeshwar Reddy","Malan Patel","Nalayini Kumar","Omprakash Menon"],
+        "Shubha Mukherji":  ["Poonam Bose","Qaiser Kaur","Ragini Ojha","Surekha Krishnan","Tapas Venkat","Uma Bajaj","Vibhuti Rawat","Wahida Thakur","Xena Ghosh","Yogmaya Pillai"]
+      },
+      "BL7834": {
+        "Krishnamurthy":    ["Zafran Ansari","Almas Bano","Balwant Shetty","Chandrika Gupta","Dayaram Joshi","Eswari Nair","Faisal Reddy","Gajra Patel","Hansha Kumar","Inderjeet Menon"],
+        "Radha Devi":       ["Jayashree Bose","Kamlesh Kaur","Lata Ojha","Mahipal Krishnan","Nandita Venkat","Oinam Bajaj","Prakashvati Rawat","Quddus Thakur","Rajkumari Ghosh","Shalini Pillai"]
+      }
+    },
+    "BLC002": {
+      "BL2345": {
+        "Thangam Rajan":    ["Tarachand Ansari","Usha Bano","Vasantha Shetty","Wangchuk Gupta","Xena Joshi","Yalini Nair","Zarine Reddy","Anil Patel","Bhavesh Kumar","Chokshi Menon"],
+        "Parvathy Nair":    ["Devika Bose","Eknath Kaur","Fattehbhai Ojha","Godavari Krishnan","Hari Shankar Venkat","Imtiyaz Bajaj","Jhansi Rawat","Keshavlal Thakur","Lilavati Ghosh","Murugavel Pillai"]
+      },
+      "BL6678": {
+        "Saraswathi Iyer":  ["Nallamuthu Ansari","Omvati Bano","Prabhakaran Shetty","Qadri Gupta","Rukminibai Joshi","Shanmugam Nair","Thilagam Reddy","Umabai Patel","Venkatesh Kumar","Warrier Menon"],
+        "Gopinath Menon":   ["Xavier Bose","Yamuna Kaur","Zubeda Ojha","Ambalavanan Krishnan","Bhagyalakshmi Venkat","Chidambaram Bajaj","Dhanabalan Rawat","Elumalai Thakur","Fathima Ghosh","Govindappa Pillai"]
+      }
+    }
+  },
+  "NJPR": {
+    "JPC001": {
+      "JP8823": {
+        "Rajputana Devi":   ["Harshvardhan Ansari","Ishrat Bano","Jaswant Shetty","Kalpana Gupta","Laxmibai Joshi","Mangal Nair","Narendra Reddy","Omwati Patel","Purushottam Kumar","Qamruddin Menon"],
+        "Bhawani Shankar":  ["Rampyari Bose","Sarkari Kaur","Tikaram Ojha","Urmila Krishnan","Vimla Venkat","Waseem Bajaj","Xena Rawat","Yashpal Thakur","Zafar Ghosh","Amarchand Pillai"]
+      },
+      "JP3456": {
+        "Sugandhilal":      ["Bhagwanti Ansari","Chauthmal Bano","Daulatram Shetty","Fakira Gupta","Ghasiram Joshi","Hiralal Nair","Itawar Reddy","Jankilal Patel","Kesrimal Kumar","Lachhibai Menon"],
+        "Manohar Lal":      ["Meghraj Bose","Nanuram Kaur","Omprakash Ojha","Phoolwati Krishnan","Ramlal Venkat","Santosh Bajaj","Tikabai Rawat","Urmilabai Thakur","Vidhya Ghosh","Waghubai Pillai"]
+      }
+    },
+    "JPC002": {
+      "JP5567": {
+        "Durgalal Sharma":  ["Xena Ansari","Yaduraj Bano","Zaffar Shetty","Anoop Gupta","Bansidhar Joshi","Chameli Nair","Dauji Reddy","Ekvir Patel","Ferozbai Kumar","Gajadhar Menon"],
+        "Kamladevi":        ["Heeraben Bose","Indumati Kaur","Jankibai Ojha","Kewaldas Krishnan","Laadli Venkat","Motilal Bajaj","Nathulal Rawat","Omprakash Thakur","Phool Singh Ghosh","Ratan Pillai"]
+      },
+      "JP1289": {
+        "Chandrabhan":      ["Shamlal Ansari","Taraveeti Bano","Umravati Shetty","Vilasrao Gupta","Waheguru Joshi","Xena Nair","Yashvant Reddy","Zaibunnisa Patel","Aabha Kumar","Bhagirathi Menon"],
+        "Savitri Devi":     ["Chunnilal Bose","Damayanti Kaur","Etwari Ojha","Fulkumari Krishnan","Gangabai Venkat","Harkhubai Bajaj","Ishwardas Rawat","Jamnabai Thakur","Karimuddin Ghosh","Lakhpati Pillai"]
+      }
+    }
+  },
+  "WMUM": {
+    "MUC001": {
+      "MU7712": {
+        "Anushka Pawar":    ["Manibhai Ansari","Nalini Bano","Onkar Shetty","Prabhavati Gupta","Qurban Joshi","Rukhsana Nair","Shantiram Reddy","Tukaram Patel","Urvashi Kumar","Vasantrao Menon"],
+        "Dilip Naik":       ["Wamanrao Bose","Xena Kaur","Yashwantrao Ojha","Zankhana Krishnan","Abasaheb Venkat","Balasaheb Bajaj","Chandrabai Rawat","Dattopant Thakur","Eknath Ghosh","Fulabai Pillai"]
+      },
+      "MU4389": {
+        "Sulabha Desai":    ["Govindrao Ansari","Hirabai Bano","Indrabai Shetty","Jaibai Gupta","Kachru Joshi","Laxmanrao Nair","Mahadeo Reddy","Narsoba Patel","Omkar Kumar","Parubai Menon"],
+        "Pandurang Rao":    ["Rajabai Bose","Sarubai Kaur","Tatyarao Ojha","Umabai Krishnan","Vitthalrao Venkat","Wamanabai Bajaj","Xena Rawat","Yamunabai Thakur","Zulekha Ghosh","Anantrao Pillai"]
+      }
+    },
+    "MUC002": {
+      "MU2234": {
+        "Sushila Bhave":    ["Bhaskar Ansari","Champabai Bano","Dnyanoba Shetty","Eknathrao Gupta","Fitrat Joshi","Gopikabai Nair","Hamidabai Reddy","Indrabai Patel","Janabai Kumar","Kashibai Menon"],
+        "Ramchandra Jog":   ["Lakshminath Bose","Manikrao Kaur","Nagnath Ojha","Omkareshwar Krishnan","Pratibha Venkat","Qureshi Bajaj","Ramabai Rawat","Savlaram Thakur","Tarabai Ghosh","Ushatai Pillai"]
+      },
+      "MU6601": {
+        "Meenabai Thorat":  ["Vaijayantabai Ansari","Wamanbua Bano","Xena Shetty","Yamunabai Gupta","Zinabai Joshi","Atmaram Nair","Baburao Reddy","Chintamanrao Patel","Dinanath Kumar","Ekveera Menon"],
+        "Vishwas Kulkarni": ["Fulrenu Bose","Gangadhar Kaur","Harishchandra Ojha","Irawati Krishnan","Jayantibai Venkat","Kailas Bajaj","Lalitabai Rawat","Madhavrao Thakur","Narharirao Ghosh","Omprakash Pillai"]
+      }
+    }
+  },
+  "WAHM": {
+    "AHC001": {
+      "AH3341": {
+        "Manjulaben Patel":  ["Parshottam Ansari","Qureshi Bano","Ranchhodbhai Shetty","Savitaben Gupta","Thakorebhai Joshi","Umedabhai Nair","Valiben Reddy","Wasimbhai Patel","Xena Kumar","Yasminbhai Menon"],
+        "Chimanlal Shah":    ["Zarinaben Bose","Ambalal Kaur","Bhailalbhai Ojha","Champakbhai Krishnan","Dahyabhai Venkat","Elaben Bajaj","Falguni Rawat","Ganpatbhai Thakur","Hansaben Ghosh","Ishwarbhai Pillai"]
+      },
+      "AH5678": {
+        "Sarladevi Amin":    ["Jashvantbhai Ansari","Kantaben Bano","Lavjibhai Shetty","Maniben Gupta","Naginbhai Joshi","Oshaben Nair","Punjabhai Reddy","Qasimben Patel","Ranjitbhai Kumar","Shardaben Menon"],
+        "Navinbhai Desai":   ["Taraben Bose","Umedbhai Kaur","Vasantbhai Ojha","Wantaben Krishnan","Xena Venkat","Yamunaben Bajaj","Zankhanaaben Rawat","Ajitbhai Thakur","Bhanuben Ghosh","Chandrikaben Pillai"]
+      }
+    },
+    "AHC002": {
+      "AH9012": {
+        "Hemlata Trivedi":   ["Dhirubhai Ansari","Elaben Bano","Fuliben Shetty","Gopalbhai Gupta","Harshaben Joshi","Indravadan Nair","Jayaben Reddy","Kalidas Patel","Laxmiben Kumar","Mahendrabhai Menon"],
+        "Rasiklal Vora":     ["Naliben Bose","Omprakash Kaur","Punjabhai Ojha","Qamarben Krishnan","Ramilaben Venkat","Sundarben Bajaj","Taraben Rawat","Urmilaben Thakur","Vimlaben Ghosh","Wasimaben Pillai"]
+      },
+      "AH4456": {
+        "Geetaben Pandya":   ["Xena Ansari","Yashaben Bano","Zankhana Shetty","Amrutbhai Gupta","Bhavnaben Joshi","Chhotalal Nair","Dayaben Reddy","Elabenben Patel","Falguni Kumar","Ghanshyambhai Menon"],
+        "Prakashbhai Jani":  ["Hansrajbhai Bose","Indiraben Kaur","Jivubhai Ojha","Kantilal Krishnan","Leelavati Venkat","Mansukhbhai Bajaj","Nirmalaben Rawat","Omprakash Thakur","Pravinbhai Ghosh","Qudsiyaben Pillai"]
       }
     }
   }
